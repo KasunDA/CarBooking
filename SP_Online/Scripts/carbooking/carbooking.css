@@ -1,0 +1,72 @@
+.carPopup{
+	display: none;
+}
+
+.carClickable{
+	cursor: pointer;
+}
+
+.carWeek{
+	vertical-align: super;
+	margin: 10px;
+	font-size: 12px;
+}
+
+#mainTable{
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#mainBody .weekTitles{
+	height: 30px;
+	background-color: black;
+	color: white;
+	text-align: center;
+	font-weight: bold;
+}
+
+#mainBody .weekDay > td{
+	height: 100px;
+	border-collapse: collapse;
+	border: 1px solid black;
+	vertical-align: top;
+}
+
+#mainBody table{
+	width: 360px;
+	padding: 2px;
+}
+
+#mainBody table td{
+	height: 16px;
+}
+
+.carAdd{
+	vertical-align: middle;
+	position: relative;
+	left: 20px;
+}
+
+.error{
+	background-color: red;
+}
+
+#carsAvailable, #carFilter{
+	width: 250px;
+}
+
+.carFilter{
+	vertical-align: middle!important;
+	text-align: center;
+}
+
+#carPopup{
+	display: none;
+	position: absolute;
+	width: 300px;
+	padding: 10px;
+	background: #eeeeee;
+	color: #000000;
+	border: 1px solid #1a1a1a;
+	font-size: 90%;
+}

@@ -1,0 +1,54 @@
+<script src="../../SiteAssets/Scripts/carbooking/jquery.min.js" type="text/javascript"></script>
+<script src="../../SiteAssets/Scripts/carbooking/jquery-ui.min.js" type="text/javascript"></script>
+<link rel="stylesheet" href="../../SiteAssets/Scripts/carbooking/jquery-ui.min.css">
+<script src="../../SiteAssets/Scripts/carbooking/knockout-3.3.0.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../SiteAssets/Scripts/carbooking/carbooking.css">
+<script src="../../SiteAssets/Scripts/carbooking/carbooking.js" type="text/javascript"></script>
+
+<script src="/_layouts/15/clienttemplates.js" type="text/javascript"></script>
+<script src="/_layouts/15/clientforms.js" type="text/javascript"></script>
+<script src="/_layouts/15/clientpeoplepicker.js" type="text/javascript"></script>
+<script src="/_layouts/15/autofill.js" type="text/javascript"></script>
+
+<br/>
+<div style="text-align:center;">
+	<img class="carLegtArrow carClickable" src="/_layouts/images/arrlefta.gif" onclick="a.b.WeekArrowClicked(this)"><span class="carWeek"></span><img class="carRightArrow carClickable" src="/_layouts/images/arrrighta.gif" onClick="a.b.WeekArrowClicked(this)">
+</div>
+<br/>
+<div>
+	<table id="mainTable">
+		<tbody id="mainBody">
+			<tr class="weekTitles"><td>Monday</td><td>Tuesday</td><td>Wednesday</td></tr>
+			<tr class="weekDay"></tr>
+			<tr class="weekTitles"><td>Thursday</td><td>Friday</td><td>Filter</td></tr>
+			<tr class="weekDay"></tr>
+		</tbody>
+	</table>
+</div>
+ 
+<!-- New Car -->
+<div class='carPopup' title="Car">
+	<table>
+		<tbody>
+			<tr>
+				<td>From: </td><td><input id="carTimeFrom" value="" onChange="a.b.StartGettingResources()" size="10"></td>
+			</tr>
+			<tr>
+				<td>To: </td><td><input id="carTimeTo" value="" onChange="a.b.StartGettingResources()" size="10"></td>
+			</tr>
+			<tr>
+				<td>Car: </td><td><select id="carsAvailable"></select></td>
+			</tr>
+			<tr>
+				<td>Owner: </td><td><div id="carOwner"></div></td>
+			</tr>
+			<tr>
+				<td>Comments: </td><td><input id="carComments" value="" size="40" maxlength="35"></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<!-- popup -->
+<div id="carPopup">
+</div>

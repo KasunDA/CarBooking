@@ -8,6 +8,7 @@ $(document).ready(function () {
 		c.activeweek_date = new Date();
 		c.edited_car = null;
 		c.resources = [];
+		c.relative_url = (_spPageContextInfo.webServerRelativeUrl + "/").replace("//", "/");
 
 		c.time_offset_client = (0 - (new Date).getTimezoneOffset()) * 60000;		//client's time zone
 		c.time_offset_server = 4 * 3600000;		//time zone set on the server
@@ -60,7 +61,7 @@ $(document).ready(function () {
 		function GetPermissions(){
 			var deferred = $.Deferred();
 			c.bypass_rules = "";
-			$.getJSON("/requests/_vti_bin/listdata.svc/" + c.list_permissions + "(1)?$select=BypassRules/Account,CarManager/Account,InAdvanceSchedule&$expand=BypassRules,CarManager", function(data){
+			$.getJSON(c.relative_url + "_vti_bin/listdata.svc/" + c.list_permissions + "(1)?$select=BypassRules/Account,CarManager/Account,InAdvanceSchedule&$expand=BypassRules,CarManager", function(data){
 				if (data.d.BypassRules.results){
 					for(i in data.d.BypassRules.results){
 						var result = data.d.BypassRules.results[i];
@@ -118,7 +119,7 @@ $(document).ready(function () {
 
 
 		function GetBookings(){
-			$.getJSON("/requests/_vti_bin/listdata.svc/" + c.list_bookings + "?$select=Owner_Login,Owner_,Details,Comments,Resource,From,To&$orderby=From", function(data){
+			$.getJSON(c.relative_url + "_vti_bin/listdata.svc/" + c.list_bookings + "?$select=Owner_Login,Owner_,Details,Comments,Resource,From,To&$orderby=From", function(data){
 			
 				for (var i=1; i<=5; i++) {
 					c.viewModel["Cars" + i]([]);		//clear all Car arrays
@@ -169,7 +170,7 @@ $(document).ready(function () {
 
 
 		function GetAllResources(){
-			$.getJSON("/requests/_vti_bin/listdata.svc/" + c.list_resources + "?$select=Title,DriverName,DriverPhone", function(data){
+			$.getJSON(c.relative_url + "_vti_bin/listdata.svc/" + c.list_resources + "?$select=Title,DriverName,DriverPhone", function(data){
 				var filter = '<option value=""></option>';
 				for (i in data.d.results) {
 					var result = data.d.results[i];
@@ -206,7 +207,7 @@ $(document).ready(function () {
 
 
 		function CheckIfResourceAvailable(resource, deferred, type){
-			$.getJSON("/requests/_vti_bin/listdata.svc/" + c.list_bookings + "?$select=Details,From,To&$filter=((From ge datetime'" + c.grDate + "') and (From lt datetime'" + c.lesDate + "') and (Resource eq '" + resource + "'))", function(data){
+			$.getJSON(c.relative_url + "_vti_bin/listdata.svc/" + c.list_bookings + "?$select=Details,From,To&$filter=((From ge datetime'" + c.grDate + "') and (From lt datetime'" + c.lesDate + "') and (Resource eq '" + resource + "'))", function(data){
 				var ok;
 				if (data.d.results.length){		//if there are results
 					for (i in data.d.results) {
@@ -405,7 +406,7 @@ $(document).ready(function () {
 				"Owner_Login": c.car_ownerLogin,
 			}
 
-			var url_ = "/requests/_vti_bin/listdata.svc/" + c.list_bookings;
+			var url_ = c.relative_url + "_vti_bin/listdata.svc/" + c.list_bookings;
 			var headers_ = {
 					"Accept": "application/json;odata=verbose"
 				};
@@ -613,7 +614,7 @@ $(document).ready(function () {
 			};
 
 			$.ajax({
-				url: "/requests/_vti_bin/listdata.svc/" + c.list_notifications,
+				url: c.relative_url + "_vti_bin/listdata.svc/" + c.list_notifications,
 				type: "POST",
 				processData: false,
 				contentType: "application/json;odata=verbose",
@@ -713,7 +714,7 @@ $(document).ready(function () {
 		function PopupPeoplePicker(defaultSearch){		//people picker popup window
 			//if(defaultSearch==undefined)
 				//defaultSearch='';
-			var sDialogUrl = "/requests/_layouts/Picker.aspx?MultiSelect=False&CustomProperty=User,SecGroup,SPGroup;;15;;;False&DialogTitle=Select Owner&DialogImage=/_layouts/images/ppeople.gif&PickerDialogType=Microsoft.SharePoint.WebControls.PeoplePickerDialog, Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c";
+			var sDialogUrl = c.relative_url + "_layouts/Picker.aspx?MultiSelect=False&CustomProperty=User,SecGroup,SPGroup;;15;;;False&DialogTitle=Select Owner&DialogImage=/_layouts/images/ppeople.gif&PickerDialogType=Microsoft.SharePoint.WebControls.PeoplePickerDialog, Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c";
 			//sDialogUrl = sDialogUrl + '&DefaultSearch=' + escapeProperly(defaultSearch);
 			var sFeatures="resizable: yes; status: no; scroll: no; help: no; center: yes; dialogWidth : 575px; dialogHeight : 500px; zoominherit : 1";
 
